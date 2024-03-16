@@ -12,3 +12,5 @@ To Execute :
 
 For Swagger UI : 
 - In local check - http://localhost:8080/api-docs/
+
+Node version : 20.10.0
