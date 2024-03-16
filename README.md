@@ -1,6 +1,6 @@
 Performed the task in Node.
 
-Tech used : Node, Express, Typescript,MySQL,TypeORM,Swagger,JsonWebToken.
+Used : Node, Express, Typescript, MySQL, TypeORM, Swagger, JsonWebToken, Joi.
 
 Note : Update .env file data according to your needs.
 
