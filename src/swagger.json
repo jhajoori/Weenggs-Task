@@ -1,0 +1,274 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Task",
+    "version": "1.0.0",
+    "description": "A simple Express Task API"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "scheme": "bearer",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Authorization": []
+    }
+  ],
+  "paths": {
+    "/api/auth/login": {
+      "post": {
+        "tags": ["User"],
+        "summary": "User login",
+        "description": "User login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "james@yopmail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "Testing@123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Welcome to test task APP!"
+          },
+          "500": {
+            "description": "Something Went Wrong!!"
+          }
+        }
+      }
+    },
+
+    "/api/auth/register": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Register User",
+        "description": "Register User",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "james@yopmail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "Testing@123"
+                  },
+                  "role": {
+                    "type": "string",
+                    "example": "user",
+                    "description": "user/admin allowed. Default is user",
+                    "required": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User registered successfully!"
+          },
+          "500": {
+            "description": "Something Went Wrong!!"
+          }
+        }
+      }
+    },
+
+    "/api/user/tasks?page?perPage": {
+      "get": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "List user's tasks",
+        "description": "List user's tasks",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data found successfully!"
+          },
+          "500": {
+            "description": "Something Went Wrong!!"
+          }
+        }
+      }
+    },
+
+    "/api/user/task/{id}": {
+      "get": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "Get Task by Id",
+        "description": "Get Task by Id",
+        "parameters": [{
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data found successfully!"
+          },
+          "500": {
+            "description": "Something Went Wrong!!"
+          }
+        }
+      }
+    },
+
+    "/api/user/task": {
+      "post": {
+        "tags": ["Task"],
+        "summary": "Add Task details",
+        "description": "Add Task details",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "example": "task 1"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "A task description"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Task added successfully!"
+          },
+          "500": {
+            "description": "Something Went Wrong!!"
+          }
+        }
+      }
+    },
+
+    "/api/user/task/edit/{id}": {
+      "patch": {
+        "tags": ["Task"],
+        "summary": "Edit Task details",
+        "description": "Edit Task details",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the task to update"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "example": "task 1"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "A task description"
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "pending"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Task updated successfully!"
+          },
+          "500": {
+            "description": "Something Went Wrong!!"
+          }
+        }
+      }
+    },
+
+    "/api/user/tasks/{id}": {
+      "delete": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "Delete the Task by Id.",
+        "description": "Delete the Task by Id.",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "type": "integer",
+          "required": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Task deleted successfully!"
+          },
+          "500": {
+            "description": "Something Went Wrong!!"
+          }
+        }
+      }
+    }
+
+  }
+}
